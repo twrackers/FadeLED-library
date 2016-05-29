@@ -1,6 +1,6 @@
 # FadeLED library
 
-These files define a Finite State Machine (FSM) class which is derived from the __StateMachine__ class in this repository at [Arduino/libraries/StateMachine](https://github.com/twrackers/Arduino-projects/tree/master/libraries/StateMachine).  Its purpose is to drive an Arduino PWM-capable GPIO pin, with separate ramp-up and ramp-down times when switching between on and off.  The obvious use for this is to fade an LED connected to the pin between full-off and full-on, hence the class name.  With suitable drive hardware, it could also be used to ramp a motor's speed up and down.
+These files define a Finite State Machine (FSM) class which is derived from the __StateMachine__ class in this repository at [StateMachine-library](https://github.com/twrackers/StateMachine-library).  Its purpose is to drive an Arduino PWM-capable GPIO pin, with separate ramp-up and ramp-down times when switching between on and off.  The obvious use for this is to fade an LED connected to the pin between full-off and full-on, hence the class name.  With suitable drive hardware, it could also be used to ramp a motor's speed up and down.
 
 Actually, the __FadeLED__ class is itself a base class for two derived classes in this library.
 * __FadeLED_Lin__ provides a linear ramp between the on and off states.
