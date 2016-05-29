@@ -1,1 +1,13 @@
+# FadeLED library
 
+These files define a Finite State Machine (FSM) class which is derived from the __StateMachine__ class in this repository at [Arduino/libraries/StateMachine](https://github.com/twrackers/Arduino-projects/tree/master/libraries/StateMachine).  Its purpose is to drive an Arduino PWM-capable GPIO pin, with separate ramp-up and ramp-down times when switching between on and off.  The obvious use for this is to fade an LED connected to the pin between full-off and full-on, hence the class name.  With suitable drive hardware, it could also be used to ramp a motor's speed up and down.
+
+Actually, the __FadeLED__ class is itself a base class for two derived classes in this library.
+* __FadeLED_Lin__ provides a linear ramp between the on and off states.
+* __FadeLED_Exp__ provides exponential-curve transitions between on and off, such as the way an incandescent bulb has finite times switching on and going fully dark when switched off.
+  
+__FadeLED_Lin__ would be used to mimic a light which is ramped up and down for some purpose.  An example is those red beacons you see at night on radio towers.  Those lamps are fairly large incandescent bulbs, which undergo thermal stresses on the filaments when they switch on and off.  This stress can be reduced somewhat by bringing them up to full brightness slowly, maybe over a half second, and turning them off in the same manner.  Pulse-width modulation (PWM) is a natural way to accomplish this.  Another possible reason that the beacons are lit this way is to be less distracting to pilots in the air.  For whatever reason, a linear fade would best mimic the behavior of these beacons.
+
+__FadeLED_Exp__, on the other hand, would allow you to mimic an inherent characteristic of incandescent lamps: they take finite times to come up to full temperature and brightness (longer for larger lamps) and to go dark when they're switched off.  These are thermal effects, so the rate of brightening or dimming is fastest when power is first applied or removed from the lamp, then it flattens as the lamp approaches fully on or off.  If you drive a car at night, you've seen this effect even if you haven't noticed it.  Newer cars use red LEDs for their brake lights, which are instant-on and instant-off, as far as our eyes can tell.  Older cars have incandescent bulbs for the brake lights, with short but visible fade-in and fade-out times.  If you watch for this, you can usually tell immediately from a distance which type a given car has.
+
+Examples of linear and exponential fade curves can be seen [here](https://github.com/twrackers/Arduino-projects/blob/master/libraries/FadeLED/FadeLED_plot.png).
