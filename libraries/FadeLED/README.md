@@ -4,7 +4,7 @@ These files define a Finite State Machine (FSM) class which is derived from the 
 
 Actually, the __FadeLED__ class is itself a base class for two derived classes in this library.
 * __FadeLED_Lin__ provides a linear ramp between the on and off states.
-* __FadeLED_Exp__ provides exponential-curve transitions between on and off, such as the way an incandescent bulb has finite times switching on and going fully dark when switched off.
+* __FadeLED_Exp__ provides exponential-curve transitions between on and off, such as the way an incandescent bulb has finite times coming to full brightness when switchied on, and going fully dark when switched off.
   
 __FadeLED_Lin__ would be used to mimic a light which is ramped up and down for some purpose.  An example is those red beacons you see at night on radio towers.  Those lamps are fairly large incandescent bulbs, which undergo thermal stresses on the filaments when they switch on and off.  This stress can be reduced somewhat by bringing them up to full brightness slowly, maybe over a half second, and turning them off in the same manner.  Pulse-width modulation (PWM) is a natural way to accomplish this.  Another possible reason that the beacons are lit this way is to be less distracting to pilots in the air.  For whatever reason, a linear fade would best mimic the behavior of these beacons.
 
