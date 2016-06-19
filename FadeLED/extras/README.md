@@ -1,2 +1,0 @@
-# FadeLED library
-
