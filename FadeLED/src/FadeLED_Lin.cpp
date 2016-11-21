@@ -26,7 +26,7 @@ bool FadeLED_Lin::update()
         unsigned long d = millis() - m_switchTime;  // time since state change
         if (m_state == eTurningOn) {
             // Has fade time completed?
-            if (d >= m_onTime) {
+            if ((long) (d - m_onTime) >= 0) {
                 // If so, output will be fully on.
                 m_state = eOn;
                 val = 255;
@@ -38,7 +38,7 @@ bool FadeLED_Lin::update()
             analogWrite(m_pin, m_invert ? (255 - val) : val);
         } else if (m_state == eTurningOff) {
             // Has fade time completed?
-            if (d >= m_offTime) {
+            if ((long) (d - m_offTime) >= 0) {
                 // If so, output will be fully off.
                 m_state = eOff;
                 val = 0;
