@@ -11,4 +11,4 @@ __FadeLED_Lin__ can be used to mimic a light which is ramped up and down for som
 
 __FadeLED_Exp__, on the other hand, would allow you to mimic an inherent characteristic of incandescent lamps: they take finite times to come up to full temperature and brightness (longer for larger lamps) and to go dark when they're switched off.  These are thermal effects, so the rate of brightening or dimming is fastest when power is first applied or removed from the lamp, then it flattens as the lamp approaches fully on or off.  If you drive a car at night, you've seen this effect even if you haven't noticed it.  Newer cars use red LEDs for their brake lights, which are instant-on and instant-off, as far as our eyes can tell.  Older cars have incandescent bulbs for the brake lights, with short but visible fade-in and fade-out times.  If you watch for this, you can usually tell immediately from a distance which type a given car has.
 
-Examples of linear and exponential fade curves can be seen [here](FadeLED/extras/FadeLED_plot.png).
+Examples of linear and exponential fade curves can be seen [here](extras/FadeLED_plot.png).
