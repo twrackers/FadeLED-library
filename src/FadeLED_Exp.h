@@ -26,7 +26,8 @@ class FadeLED_Exp : public FadeLED
     private:
         double m_onTau;     // turn-on decay constant
         double m_offTau;    // turn-off decay constant
-        byte m_output;      // current output level
+        double m_level;     // current fade level
+        byte m_output;      // current output value
         
     public:
         /**
