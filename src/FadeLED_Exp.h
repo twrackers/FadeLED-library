@@ -4,7 +4,7 @@
 #include <FadeLED.h>
 
 /**
- * FadeLED_Lin
+ * FadeLED_Exp
  *
  * This class extends FadeLED to implement an exponential fade between full-off
  * and full-on on a PWM GPIO pin.  The fade times for turning on and off are
