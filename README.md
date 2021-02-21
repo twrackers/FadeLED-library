@@ -8,6 +8,13 @@ The `FadeLED` library provides the ability to turn LEDs on and off with fade-in/
 
 ## Examples ##
 
+The `FadeLED` library contains several example sketches in the `examples` directory.
+
+- `SimpleLightbulb` simulates a single incandescent bulb with visible turn-on and turn-off times, using the `FadeLED_Exp` subclass.
+- `LightbulbSim` simulates three incandescent bulbs with different turn-on and turn-off times.
+- `BeaconSim` simulates three slow-fade lights like those used on transmitter and cell towers.  This uses the `FadeLED_Lin` subclass.
+- `Faders` shows the difference in appearance between a linear and an exponential fade curve.
+
 Examples of linear and exponential fade curves can be seen [here](extras/FadeLED_plot.png).
 
 ## Dependencies ##
