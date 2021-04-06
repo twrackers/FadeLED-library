@@ -24,3 +24,11 @@ Examples of linear and exponential fade curves can be seen [here](extras/FadeLED
 ## Installation ##
 
 Instructions for installing the `FadeLED` library can be found in file `INSTALL.md` in this repository at [https://github.com/twrackers/FadeLED-library/blob/main/INSTALL.md](https://github.com/twrackers/FadeLED-library/blob/main/INSTALL.md).
+
+## API:FadeLED ##
+
+## API: FadeLED_Lin ##
+
+## API: FadeLED_Exp ##
+
+
