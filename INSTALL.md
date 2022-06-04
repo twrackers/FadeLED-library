@@ -25,12 +25,12 @@ Git is available for all the same operating systems (Windows, Mac OS X, Linux) w
 2. If your Arduino IDE is running, close it now.
 3. If you type `ls -l`, you will see a list of your libraries, including one named `FadeLED-library-main`.  It needs to be renamed:
  
-	`$ mv FadeLED-library-main Pulser`
+	`$ mv FadeLED-library-main FadeLED`
 1. You can now start the Arduino IDE again.  If from the menu you click *Sketch* -> *Include Library*, you should be able to scroll down to find `FadeLED`.
 
 ## Install ZIP file from Arduino IDE ##
 
-1. From a web browser, go to this library's repository at [https://github.com/twrackers/Pulser-library](https://github.com/twrackers/FadeLED-library).
+1. From a web browser, go to this library's repository at [https://github.com/twrackers/FadeLED-library](https://github.com/twrackers/FadeLED-library).
 2. Click on the green `Code` button, then click `Download ZIP`.  Save the downloaded file somewhere where you'll be able to find it.
 3. If your Arduino IDE isn't already running, start it now.
 4. From the menu, click *Sketch* -> *Include Library* -> *Add .ZIP Library...*.  This will open a file chooser window.
