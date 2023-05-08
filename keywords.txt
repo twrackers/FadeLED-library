@@ -8,6 +8,7 @@
 FadeLED	KEYWORD1
 FadeLED_Lin	KEYWORD1
 FadeLED_Exp	KEYWORD1
+FadeLED_Func	KEYWORD1
 
 #######################################
 # Methods and Functions (KEYWORD2)
