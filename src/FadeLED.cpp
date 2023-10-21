@@ -19,6 +19,14 @@ FadeLED::FadeLED(const byte pin, const bool invert) :
     analogWrite(m_pin, m_invert ? 255 : 0);
 }
 
+// Check if current state is fully off (dark).
+//
+// Checks if state is off, meaning the LED is fully dark.  Useful to
+// determine if a slow pulse has completed.
+bool FadeLED::isOff() const{
+    return (m_state == eOff);
+}
+
 // Gets the current state of the object.
 //
 // Turning-on and turning-off are treated as the same as on and off states

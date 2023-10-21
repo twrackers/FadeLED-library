@@ -32,6 +32,13 @@ class FadeLED : public StateMachine
          *               false otherwise [default false]
          */
         FadeLED(const byte pin, const bool invert = false);
+
+        /**
+         * Check if output is fully off
+         * 
+         * @return true if output state is off, false otherwise
+         */
+        bool isOff() const;
         
         /**
          * Get the current state
