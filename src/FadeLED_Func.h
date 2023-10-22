@@ -43,8 +43,8 @@ class FadeLED_Func : public FadeLED
          */
         FadeLED_Func(
             const byte pin, 
-            const unsigned int onTime, 
-            const unsigned int offTime,
+            const unsigned long onTime, 
+            const unsigned long offTime,
             const bool invert = false
         );
         

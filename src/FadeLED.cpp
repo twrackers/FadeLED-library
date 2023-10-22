@@ -11,7 +11,7 @@
 FadeLED::FadeLED(const byte pin, const bool invert) : 
     StateMachine(10, true),
     m_state(eOff),
-    m_switchTime(0),
+    m_switchTime(0L),
     m_pin(pin),
     m_invert(invert)
 {

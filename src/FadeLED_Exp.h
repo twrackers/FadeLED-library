@@ -41,8 +41,8 @@ class FadeLED_Exp : public FadeLED
          */
         FadeLED_Exp(
             const byte pin, 
-            const unsigned int onTime, 
-            const unsigned int offTime,
+            const unsigned long onTime, 
+            const unsigned long offTime,
             const bool invert = false
         );
         

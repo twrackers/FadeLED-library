@@ -8,8 +8,8 @@
 // function.
 FadeLED_Lin::FadeLED_Lin(
     const byte pin, 
-    const unsigned int onTime, 
-    const unsigned int offTime,
+    const unsigned long onTime, 
+    const unsigned long offTime,
     const bool invert
 ) : FadeLED(pin, invert), 
     m_onTime(onTime), 
