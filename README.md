@@ -17,11 +17,11 @@ Originally, this library only supported the Arduino `analogWrite` function to co
 
 To allow the library to support either or both of these devices in your sketch, include one or both of these `#define` lines **before** you include the header file you are using.  For example:
 
-`#define ALLOW_12CH`
-
-`#define ALLOW_24CH`
-
-`#include <FadeLED_Lin.h>`
+```
+#define ALLOW_12CH
+#define ALLOW_24CH
+#include <FadeLED_Lin.h>
+```
 
 If neither `#define` is included, the sketch will only support built-in PWM pins on the Arduino device.
 
