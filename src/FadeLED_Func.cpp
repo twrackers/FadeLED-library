@@ -17,6 +17,38 @@ FadeLED_Func::FadeLED_Func(
 {
 }
 
+#if defined(ALLOW_12CH)
+// Constructor
+//
+// This is a subclass of FadeLED, implementing fade curves.
+FadeLED_Func::FadeLED_Func(
+    Adafruit_TLC59711& device, 
+    uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
+) : FadeLED(device, channel), 
+    m_onTime(onTime), 
+    m_offTime(offTime)
+{
+}
+#endif
+
+#if defined(ALLOW_24CH)
+// Constructor
+//
+// This is a subclass of FadeLED, implementing fade curves.
+FadeLED_Func::FadeLED_Func(
+    Adafruit_TLC5947& device, 
+    uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
+) : FadeLED(device, channel), 
+    m_onTime(onTime), 
+    m_offTime(offTime)
+{
+}
+#endif
+
 // Performs the update cycle.
 bool FadeLED_Func::update()
 {
@@ -60,5 +92,6 @@ void FadeLED_Func::set(const double f)
 {
     byte val = (byte) (constrain(f, 0.0, 1.0) * 255.0);
     // Set output value, inverting if necessary.
-    analogWrite(m_pin, m_invert ? (255 - val) : val);
+    setPWM(m_invert ? (255 - val) : val);
+//     analogWrite(m_pin, m_invert ? (255 - val) : val);
 }

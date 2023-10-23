@@ -17,6 +17,38 @@ FadeLED_Lin::FadeLED_Lin(
 {
 }
 
+#if defined(ALLOW_12CH)
+// Constructor
+//
+// This is a subclass of FadeLED, implementing linear fade curves.
+FadeLED_Lin::FadeLED_Lin(
+    Adafruit_TLC59711& device, 
+    uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
+) : FadeLED(device, channel), 
+    m_onTime(onTime), 
+    m_offTime(offTime)
+{
+}
+#endif
+
+#if defined(ALLOW_24CH)
+// Constructor
+//
+// This is a subclass of FadeLED, implementing linear fade curves.
+FadeLED_Lin::FadeLED_Lin(
+    Adafruit_TLC5947& device, 
+    uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
+) : FadeLED(device, channel), 
+    m_onTime(onTime), 
+    m_offTime(offTime)
+{
+}
+#endif
+
 // Performs the update cycle.
 bool FadeLED_Lin::update()
 {
@@ -35,7 +67,8 @@ bool FadeLED_Lin::update()
                 val = (byte) ((d * 255) / m_onTime);
             }
             // Set output value, inverting if necessary.
-            analogWrite(m_pin, m_invert ? (255 - val) : val);
+            setPWM(m_invert ? (255 - val) : val);
+        //     analogWrite(m_pin, m_invert ? (255 - val) : val);
         } else if (m_state == eTurningOff) {
             // Has fade time completed?
             if ((long) (d - m_offTime) >= 0) {
@@ -47,7 +80,8 @@ bool FadeLED_Lin::update()
                 val = (byte) (255 - ((d * 255) / m_offTime));
             }
             // Set output value, inverting if necessary.
-            analogWrite(m_pin, m_invert ? (255 - val) : val);
+            setPWM(m_invert ? (255 - val) : val);
+        //     analogWrite(m_pin, m_invert ? (255 - val) : val);
         }
         // Object was updated.
         return true;

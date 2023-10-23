@@ -33,7 +33,7 @@ class FadeLED_Func : public FadeLED
         
     public:
         /**
-         * Constructor
+         * Constructor to drive Arduino PWM output pin
          *
          * @param pin PWM pin (analog write) to be controlled
          * @param onTime turn-on time (milliseconds)
@@ -48,6 +48,36 @@ class FadeLED_Func : public FadeLED
             const bool invert = false
         );
         
+#if defined(ALLOW_12CH)
+        /**
+         * Constructor to drive Adafruit 12-Channel 16-bit PWM LED Driver
+         * 
+         * @param device Attached Adafruit_TLC59711 device
+         * @param channel Channel, in range 0 to 11
+         */
+        FadeLED_Func(
+            Adafruit_TLC59711& device, 
+            uint16_t channel,
+            const unsigned long onTime, 
+            const unsigned long offTime
+        );
+#endif
+
+#if defined(ALLOW_24CH)
+        /**
+         * Constructor to drive Adafruit 24-Channel 12-bit PWM LED Driver
+         * 
+         * @param device Attached Adafruit_TLC5947 device
+         * @param channel Channel, in range 0 to 23
+         */
+        FadeLED_Func(
+            Adafruit_TLC5947& device,
+            uint16_t channel,
+            const unsigned long onTime, 
+            const unsigned long offTime
+        );
+#endif
+
         /**
          * Update this object's state.
          *

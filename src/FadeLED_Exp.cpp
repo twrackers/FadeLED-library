@@ -2,6 +2,22 @@
 
 #include <FadeLED_Exp.h>
 
+// Private timing initialization code
+//
+// This is used by the constructors.
+void FadeLED_Exp::init(
+    const unsigned long onTime, 
+    const unsigned long offTime
+) {
+    double dt;
+    // Calculate turning-on decay constant.
+    dt = (double) onTime / (double) m_updateDelta;
+    m_onTau = pow(255.0, -1.0 / dt);
+    // Calculate turning-off decay constant.
+    dt = (double) offTime / (double) m_updateDelta;
+    m_offTau = pow(255.0, -1.0 / dt);
+}
+
 // Constructor
 //
 // This is a subclass of FadeLED, implementing exponential fade curves.
@@ -15,14 +31,42 @@ FadeLED_Exp::FadeLED_Exp(
     const bool invert
 ) : FadeLED(pin, invert), m_level(0.0), m_output(0)
 {
-    double dt;
-    // Calculate turning-on decay constant.
-    dt = (double) onTime / (double) m_updateDelta;
-    m_onTau = pow(255.0, -1.0 / dt);
-    // Calculate turning-off decay constant.
-    dt = (double) offTime / (double) m_updateDelta;
-    m_offTau = pow(255.0, -1.0 / dt);
+    init(onTime, offTime);
 }
+
+#if defined(ALLOW_12CH)
+// Constructor
+//
+// This is a subclass of FadeLED, implementing exponential fade curves.
+// The PWM output is one of the channels of an Adafruit TLC59711 12-channel
+// PWM driver.
+FadeLED_Exp::FadeLED_Exp(
+    Adafruit_TLC59711& device,
+    const uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
+) : FadeLED(device, channel), m_level(0.0), m_output(0)
+{
+    init(onTime, offTime);
+}
+#endif
+
+#if defined(ALLOW_24CH)
+// Constructor
+//
+// This is a subclass of FadeLED, implementing exponential fade curves.
+// The PWM output is one of the channels of an Adafruit TLC5947 24-channel
+// PWM driver.
+FadeLED_Exp::FadeLED_Exp(
+    Adafruit_TLC5947& device,
+    const uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
+) : FadeLED(device, channel), m_level(0.0), m_output(0)
+{
+    init(onTime, offTime);
+}
+#endif
 
 // Performs the update cycle.
 bool FadeLED_Exp::update()
@@ -48,10 +92,11 @@ bool FadeLED_Exp::update()
             }
         }
         // Write new output value, inverting if necessary.
-        analogWrite(
-            m_pin,
-            m_invert ? (255 - m_output) : m_output
-        );
+        setPWM(m_invert ? (255 - m_output) : m_output);
+        // analogWrite(
+        //     m_pin,
+        //     m_invert ? (255 - m_output) : m_output
+        // );
         // Object was updated.
         return true;
     }
