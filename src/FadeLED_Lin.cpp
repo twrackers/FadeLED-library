@@ -55,21 +55,25 @@ bool FadeLED_Lin::update()
     // Is it time to update this object?
     if (FadeLED::update()) {
         byte val;   // will hold current output value
-        unsigned long d = millis() - m_switchTime;  // time since state change
-        if (m_state == eTurningOn) {
+        if (m_state == eOff) {
+            val = 0;
+        } else if (m_state == eOn) {
+            val = m_scale;
+        } else if (m_state == eTurningOn) {
+            unsigned long d = millis() - m_switchTime;  // time since state change
             // Has fade time completed?
             if ((long) (d - m_onTime) >= 0) {
                 // If so, output will be fully on.
                 m_state = eOn;
-                val = 255;
+                val = m_scale;
             } else {
                 // Otherwise, interpolate output.
-                val = (byte) ((d * 255) / m_onTime);
+                val = (byte) ((d * m_scale) / m_onTime);
             }
             // Set output value, inverting if necessary.
-            setPWM(m_invert ? (255 - val) : val);
-        //     analogWrite(m_pin, m_invert ? (255 - val) : val);
+            setPWM(m_invert ? (m_scale - val) : val);
         } else if (m_state == eTurningOff) {
+            unsigned long d = millis() - m_switchTime;  // time since state change
             // Has fade time completed?
             if ((long) (d - m_offTime) >= 0) {
                 // If so, output will be fully off.
@@ -77,11 +81,10 @@ bool FadeLED_Lin::update()
                 val = 0;
             } else {
                 // Otherwise, interpolate output.
-                val = (byte) (255 - ((d * 255) / m_offTime));
+                val = (byte) (m_scale - ((d * m_scale) / m_offTime));
             }
             // Set output value, inverting if necessary.
-            setPWM(m_invert ? (255 - val) : val);
-        //     analogWrite(m_pin, m_invert ? (255 - val) : val);
+            setPWM(m_invert ? (m_scale - val) : val);
         }
         // Object was updated.
         return true;

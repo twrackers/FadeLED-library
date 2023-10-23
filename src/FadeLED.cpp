@@ -19,10 +19,11 @@ FadeLED::FadeLED(const byte pin, const bool invert) :
     m_dev24(NULL),
 #endif
     m_pin((uint16_t) pin),
+    m_scale(0x00FF),
     m_invert(invert)
 {
     pinMode(m_pin, OUTPUT);
-    analogWrite(m_pin, m_invert ? 255 : 0);
+    analogWrite(m_pin, m_invert ? m_scale : 0);
 }
 
 #if defined(ALLOW_12CH)
@@ -42,6 +43,7 @@ FadeLED::FadeLED(Adafruit_TLC59711& device, const uint16_t channel) :
     m_dev24(NULL),
 #endif
     m_pin(channel),
+    m_scale(0xFFFF),
     m_invert(false)
 {
     m_dev12->setPWM(m_pin, 0);
@@ -66,6 +68,7 @@ FadeLED::FadeLED(Adafruit_TLC5947& device, uint16_t channel) :
 #endif
     m_dev24(&device),
     m_pin(channel),
+    m_scale(0x0FFF),
     m_invert(false)
 {
     m_dev24->setPWM(m_pin, 0);
@@ -84,18 +87,18 @@ void FadeLED::setPWM(const uint16_t pwm) {
 #if defined(ALLOW_12CH)
     if (m_dev12) {
         // 16-bit PWM channels
-        m_dev12->setPWM(m_pin, pwm);
+        m_dev12->setPWM(m_pin, pwm & m_scale);
         return;
     }
 #endif
 #if defined(ALLOW_24CH)
     if (m_dev24) {
         // 12-bit PWM channels
-        m_dev24->setPWM(m_pin, pwm & 0x0FFF);
+        m_dev24->setPWM(m_pin, pwm & m_scale);
         return;
     }
 #endif
-    analogWrite(m_pin, pwm & 0x00FF);
+    analogWrite(m_pin, pwm & m_scale);
 }
 
 // Check if current state is fully off (dark).

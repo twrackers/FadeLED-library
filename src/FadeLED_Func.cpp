@@ -54,8 +54,12 @@ bool FadeLED_Func::update()
 {
     // Is it time to update this object?
     if (FadeLED::update()) {
-        unsigned long d = millis() - m_switchTime;  // time since state change
-        if (m_state == eTurningOn) {
+        if (m_state == eOff) {
+            m_current = 0.0;
+        } else if (m_state == eOn) {
+            m_current = 1.0;
+        } else if (m_state == eTurningOn) {
+            unsigned long d = millis() - m_switchTime;  // time since state change
             // Has fade time completed?
             if ((long) (d - m_onTime) >= 0) {
                 // If so, output will be fully on.
@@ -66,6 +70,7 @@ bool FadeLED_Func::update()
                 m_current = (double) d / (double) m_onTime;
             }
         } else if (m_state == eTurningOff) {
+            unsigned long d = millis() - m_switchTime;  // time since state change
             // Has fade time completed?
             if ((long) (d - m_offTime) >= 0) {
                 // If so, output will be fully off.
@@ -90,8 +95,7 @@ double FadeLED_Func::get() const
 
 void FadeLED_Func::set(const double f)
 {
-    byte val = (byte) (constrain(f, 0.0, 1.0) * 255.0);
+    byte val = (byte) (constrain(f, 0.0, 1.0) * (double) m_scale);
     // Set output value, inverting if necessary.
-    setPWM(m_invert ? (255 - val) : val);
-//     analogWrite(m_pin, m_invert ? (255 - val) : val);
+    setPWM(m_invert ? (m_scale - val) : val);
 }

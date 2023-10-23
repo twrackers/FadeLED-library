@@ -36,6 +36,7 @@ class FadeLED : public StateMachine
         Adafruit_TLC5947* m_dev24;  // pointer to 24-channel device
 #endif
         const uint16_t m_pin;       // pin or channel to drive
+        const uint16_t m_scale;     // full-scale value
         const bool m_invert;        // true if output is active-low
         
     public:
