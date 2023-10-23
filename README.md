@@ -25,6 +25,8 @@ To allow the library to support either or both of these devices in your sketch, 
 
 If neither `#define` is included, the sketch will only support built-in PWM pins on the Arduino device.
 
+Note that the "invert" capability, to support LEDs connected in active-low mode, is only supported when direct PWM connections are used.  The external PWM driver devices do not support active-low.
+
 ## Examples ##
 
 The `FadeLED` library contains several sketches in the `examples` directory.
