@@ -3,8 +3,7 @@
 // Constructor
 //
 // An instance of this class runs on a 10 msec (100 Hz) update interval.
-// This constructor will be called by the constructors of subclasses of FadeLED,
-// two of which are FadeLED_Lin and FadeLED_Exp.
+// This constructor will be called by the constructors of subclasses of FadeLED.
 // The GPIO pin specified when calling this constructor must be one which
 // supports PWM (pulse-width modulation) output via the Arduino analogWrite()
 // function.
@@ -30,8 +29,7 @@ FadeLED::FadeLED(const byte pin, const bool invert) :
 // Constructor
 //
 // An instance of this class runs on a 10 msec (100 Hz) update interval.
-// This constructor will be called by the constructors of subclasses of FadeLED,
-// two of which are FadeLED_Lin and FadeLED_Exp.
+// This constructor will be called by the constructors of subclasses of FadeLED.
 // This constructor assigns the FadeLED object to one channel of an
 // Adafruit TLC59711 12-channel PWM driver.
 FadeLED::FadeLED(Adafruit_TLC59711& device, const uint16_t channel) : 
@@ -55,8 +53,7 @@ FadeLED::FadeLED(Adafruit_TLC59711& device, const uint16_t channel) :
 // Constructor
 //
 // An instance of this class runs on a 10 msec (100 Hz) update interval.
-// This constructor will be called by the constructors of subclasses of FadeLED,
-// two of which are FadeLED_Lin and FadeLED_Exp.
+// This constructor will be called by the constructors of subclasses of FadeLED.
 // This constructor assigns the FadeLED object to one channel of an
 // Adafruit TLC5947 24-channel PWM driver.
 FadeLED::FadeLED(Adafruit_TLC5947& device, uint16_t channel) : 
@@ -109,7 +106,7 @@ bool FadeLED::isOff() const {
     return (m_state == eOff);
 }
 
-// Gets the current state of the object.
+// Get the current state of the object.
 //
 // Turning-on and turning-off are treated as the same as on and off states
 // respectively.  So this method returns the most recently commanded state,
@@ -119,7 +116,7 @@ bool FadeLED::read() const
     return (m_state == eTurningOn) || (m_state == eOn);
 }
 
-// Commands the object to a specified state, on or off.
+// Command the object to a specified state, on or off.
 //
 // If the specified state is already the commanded state, no action is taken.
 // For example, if the FadeLED object is still turning off when an off state

@@ -21,6 +21,9 @@ FadeLED_Lin::FadeLED_Lin(
 // Constructor
 //
 // This is a subclass of FadeLED, implementing linear fade curves.
+// The channel selects an output on a 12-channel PWM driver.  Because
+// the driver device supports daisy-chaining, the channel is not limited
+// to the range of 0 through 11.
 FadeLED_Lin::FadeLED_Lin(
     Adafruit_TLC59711& device, 
     uint16_t channel,
@@ -37,6 +40,9 @@ FadeLED_Lin::FadeLED_Lin(
 // Constructor
 //
 // This is a subclass of FadeLED, implementing linear fade curves.
+// The channel selects an output on a 24-channel PWM driver.  Because
+// the driver device supports daisy-chaining, the channel is not limited
+// to the range of 0 through 23.
 FadeLED_Lin::FadeLED_Lin(
     Adafruit_TLC5947& device, 
     uint16_t channel,
@@ -54,7 +60,7 @@ bool FadeLED_Lin::update()
 {
     // Is it time to update this object?
     if (FadeLED::update()) {
-        byte val;   // will hold current output value
+        uint16_t val;   // will hold current output value
         if (m_state == eOff) {
             val = 0;
         } else if (m_state == eOn) {
@@ -62,13 +68,13 @@ bool FadeLED_Lin::update()
         } else if (m_state == eTurningOn) {
             unsigned long d = millis() - m_switchTime;  // time since state change
             // Has fade time completed?
-            if ((long) (d - m_onTime) >= 0) {
+            if ((long) (d - m_onTime) >= 0L) {
                 // If so, output will be fully on.
                 m_state = eOn;
                 val = m_scale;
             } else {
                 // Otherwise, interpolate output.
-                val = (byte) ((d * m_scale) / m_onTime);
+                val = (uint16_t) ((d * m_scale) / m_onTime);
             }
             // Set output value, inverting if necessary.
             setPWM(m_invert ? (m_scale - val) : val);
@@ -81,7 +87,7 @@ bool FadeLED_Lin::update()
                 val = 0;
             } else {
                 // Otherwise, interpolate output.
-                val = (byte) (m_scale - ((d * m_scale) / m_offTime));
+                val = (uint16_t) (m_scale - ((d * m_scale) / m_offTime));
             }
             // Set output value, inverting if necessary.
             setPWM(m_invert ? (m_scale - val) : val);

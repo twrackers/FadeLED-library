@@ -1,5 +1,5 @@
-#ifndef _FADE_LED_Func__H_
-#define _FADE_LED_Func__H_
+#ifndef _FADE_LED_FUNC__H_
+#define _FADE_LED_FUNC__H_
 
 #include <FadeLED.h>
 
@@ -7,19 +7,20 @@
  * FadeLED_Func
  *
  * This class extends FadeLED to implement a fade between full-off and
- * full-on on a PWM GPIO pin.  The fade times for turning on and off are
- * individually settable.  The output can also be inverted for an active-low
- * connection, that is, fully on is 0 volts and fully off is Vcc (5v on Arduino
- * Uno).  This setting would be used if current through an LED is being sinked
- * from Vcc, rather than sourced into ground.
+ * full-on on a PWM output.  The fade times for turning on and off are
+ * individually settable.  If the PWM output is a pin on the Arduino processor,
+ * it can also be inverted for an active-low connection, that is, fully on is
+ * 0 volts and fully off is Vcc (5v on Arduino UNO, for example).  This setting
+ * would be used if current through an LED is being sinked from Vcc, rather than
+ * sourced into ground.
  * 
- * This class does not specify a fade curve, unlike the _Lin and _Exp variants
+ * This class does not specify a fade curve, unlike the _Lin and _Exp subclasses
  * of the FadeLED class.  Instead, each time a FadeLED_Func updates, it computes
  * the relative output value scaled between 0.0 (full off) and 1.0 (full on).
  * The calling code can get the current output value by calling get(), computing
  * a new value in the range of [0.0, 1.0], and passing that back to the set()
- * method which will convert it to a byte value which will be written to the
- * analog output specified by the constructor.
+ * method which will convert it to an integer value which will be written to the
+ * PWM output specified by the constructor.
  *
  * This class inherits methods read() and write() from FadeLED.
  */
@@ -85,8 +86,19 @@ class FadeLED_Func : public FadeLED
          */
         virtual bool update();
 
+        /**
+         * Get fraction of time passed between start and stop times of
+         * ramp-up or ramp-down of fade.
+         * 
+         * @return Fraction of ramp interval, between 0.0 and 1.0
+         */
         double get() const;
 
+        /**
+         * Set output level
+         * 
+         * @param f output level between 0.0 (fully off) and 1.0 (fully on)
+         */
         void set(const double f);
 };
 

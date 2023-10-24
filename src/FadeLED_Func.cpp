@@ -21,6 +21,9 @@ FadeLED_Func::FadeLED_Func(
 // Constructor
 //
 // This is a subclass of FadeLED, implementing fade curves.
+// The channel selects an output on a 12-channel PWM driver.  Because
+// the driver device supports daisy-chaining, the channel is not limited
+// to the range of 0 through 11.
 FadeLED_Func::FadeLED_Func(
     Adafruit_TLC59711& device, 
     uint16_t channel,
@@ -37,6 +40,9 @@ FadeLED_Func::FadeLED_Func(
 // Constructor
 //
 // This is a subclass of FadeLED, implementing fade curves.
+// The channel selects an output on a 24-channel PWM driver.  Because
+// the driver device supports daisy-chaining, the channel is not limited
+// to the range of 0 through 23.
 FadeLED_Func::FadeLED_Func(
     Adafruit_TLC5947& device, 
     uint16_t channel,
@@ -88,14 +94,24 @@ bool FadeLED_Func::update()
     return false;
 }
 
+// Get the fraction of ramp interval which has passed so far.
 double FadeLED_Func::get() const
 {
     return m_current;
 }
 
+// Set the output channel.
+//
+// If f == 0.0, output will be set to fully off.
+// If f == 1.0, output will be set to fully on.
+// For any other value, output will be interpolated between off and on.
+//
+// On Arduino PWM pins, set() will update the output pin immediately.
+// On PWM driver devices, set() will only take effect the next time
+// a write() is called on the device itself.
 void FadeLED_Func::set(const double f)
 {
-    byte val = (byte) (constrain(f, 0.0, 1.0) * (double) m_scale);
+    uint16_t val = (uint16_t) (constrain(f, 0.0, 1.0) * (double) m_scale);
     // Set output value, inverting if necessary.
     setPWM(m_invert ? (m_scale - val) : val);
 }

@@ -38,6 +38,7 @@ class FadeLED : public StateMachine
         const uint16_t m_pin;       // pin or channel to drive
         const uint16_t m_scale;     // full-scale value
         const bool m_invert;        // true if output is active-low
+                                    // (not supported on external PWM devices)
         
     public:
         /**

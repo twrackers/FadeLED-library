@@ -9,9 +9,9 @@ void FadeLED_Exp::init(
     const unsigned long onTime, 
     const unsigned long offTime
 ) {
-    double dt;
     double scale = (double) m_scale;
     double delta = (double) m_updateDelta;
+    double dt;
     // Calculate turning-on decay constant.
     dt = (double) onTime / delta;
     m_onTau = pow(scale, -1.0 / dt);
@@ -84,19 +84,25 @@ bool FadeLED_Exp::update()
             // Update output based on current output and decay constant.
             double scale = (double) m_scale;
             m_level = scale - (scale - m_level) * m_onTau;
-            m_output = int(m_level + 0.5);
+            int output = int(round(m_level));
             // If fully-on is reached, change state to on.
-            if (m_output == m_scale) {
+            if (output >= m_scale) {
+                m_output = m_scale;
                 m_state = eOn;
+            } else {
+                m_output = (uint16_t) output;
             }
         } else if (m_state == eTurningOff) {
             unsigned long d = millis() - m_switchTime;  // time since state change
             // Update output based on current output and decay constant.
             m_level *= m_offTau;
-            m_output = int(m_level + 0.5);
+            int output = int(round(m_level));
             // If fully-off is reached, change state to off.
-            if (m_output == 0) {
+            if (output <= 0) {
+                m_output = 0;
                 m_state = eOff;
+            } else {
+                m_output = (uint16_t) output;
             }
         }
         // Write new output value, inverting if necessary.

@@ -7,13 +7,14 @@
  * FadeLED_Lin
  *
  * This class extends FadeLED to implement a linear fade between full-off and
- * full-on on a PWM GPIO pin.  The fade times for turning on and off are
- * individually settable.  The output can also be inverted for an active-low
- * connection, that is, fully on is 0 volts and fully off is Vcc (5v on Arduino
- * Uno).  This setting would be used if current through an LED is being sinked
- * from Vcc, rather than sourced into ground.
+ * full-on on a PWM output.  The fade times for turning on and off are
+ * individually settable.  If the PWM output is a pin on the Arduino processor,
+ * it can also be inverted for an active-low connection, that is, fully on is
+ * 0 volts and fully off is Vcc (5v on Arduino UNO, for example).  This setting
+ * would be used if current through an LED is being sinked from Vcc, rather than
+ * sourced into ground.
  *
- * This class inherits methods read and write from FadeLED.
+ * This class inherits methods read() and write() from FadeLED.
  */
 
 class FadeLED_Lin : public FadeLED

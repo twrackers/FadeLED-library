@@ -7,18 +7,14 @@
  * FadeLED_Exp
  *
  * This class extends FadeLED to implement an exponential fade between full-off
- * and full-on on a PWM GPIO pin.  The fade times for turning on and off are
- * individually settable.  The output can also be inverted for an active-low
- * connection, that is, fully on is 0 volts and fully off is Vcc (5v on Arduino
- * Uno).  This setting would be used if current through an LED is being sinked
- * from Vcc, rather than sourced into ground.
+ * and full-on on a PWM output.  The fade times for turning on and off are
+ * individually settable.  If the PWM output is a pin on the Arduino processor,
+ * it can also be inverted for an active-low connection, that is, fully on is
+ * 0 volts and fully off is Vcc (5v on Arduino UNO, for example).  This setting
+ * would be used if current through an LED is being sinked from Vcc, rather than
+ * sourced into ground.
  *
- * Note that the fade algorithm calculates the exponential fade curve from
- * the on and off times; however, because integer output levels are retained
- * between updates, truncation occurs which causes the actual fade times to be
- * slightly shorter than those passed to the constructor.
- *
- * This class inherits methods read and write from FadeLED.
+ * This class inherits methods read() and write() from FadeLED.
  */
 
 class FadeLED_Exp : public FadeLED
@@ -27,7 +23,7 @@ class FadeLED_Exp : public FadeLED
         double m_onTau;     // turn-on decay constant
         double m_offTau;    // turn-off decay constant
         double m_level;     // current fade level
-        byte m_output;      // current output value
+        uint16_t m_output;  // current output value
 
         /**
          * Initialization of timing parameters
