@@ -8,9 +8,9 @@
 // function.
 FadeLED_Lin::FadeLED_Lin(
     const byte pin, 
-    const unsigned long onTime, 
-    const unsigned long offTime,
-    const bool invert
+    unsigned long onTime, 
+    unsigned long offTime,
+    bool invert
 ) : FadeLED(pin, invert), 
     m_onTime(onTime), 
     m_offTime(offTime)
@@ -26,9 +26,9 @@ FadeLED_Lin::FadeLED_Lin(
 // to the range of 0 through 11.
 FadeLED_Lin::FadeLED_Lin(
     const Adafruit_TLC59711& device, 
-    const uint16_t channel,
-    const unsigned long onTime, 
-    const unsigned long offTime
+    uint16_t channel,
+    unsigned long onTime, 
+    unsigned long offTime
 ) : FadeLED(device, channel), 
     m_onTime(onTime), 
     m_offTime(offTime)
