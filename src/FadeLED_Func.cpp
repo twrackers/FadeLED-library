@@ -26,7 +26,7 @@ FadeLED_Func::FadeLED_Func(
 // to the range of 0 through 11.
 FadeLED_Func::FadeLED_Func(
     Adafruit_TLC59711& device, 
-    uint16_t channel,
+    const uint16_t channel,
     const unsigned long onTime, 
     const unsigned long offTime
 ) : FadeLED(device, channel), 
@@ -45,7 +45,7 @@ FadeLED_Func::FadeLED_Func(
 // to the range of 0 through 23.
 FadeLED_Func::FadeLED_Func(
     Adafruit_TLC5947& device, 
-    uint16_t channel,
+    const uint16_t channel,
     const unsigned long onTime, 
     const unsigned long offTime
 ) : FadeLED(device, channel), 
