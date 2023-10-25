@@ -15,17 +15,7 @@ Originally, this library only supported the Arduino `analogWrite` function to co
 - [Adafruit 12-Channel 16-bit PWM LED Driver - SPI Interface](https://www.adafruit.com/product/1455)
 - [Adafruit 24-Channel 12-bit PWM LED Driver - SPI Interface](https://www.adafruit.com/product/1429)
 
-To allow the library to support either or both of these devices in your sketch, include one or both of these `#define` lines **before** you include the header file you are using.  For example:
-
-```
-#define ALLOW_12CH
-#define ALLOW_24CH
-#include <FadeLED_Lin.h>
-```
-
-If neither `#define` is included, the sketch will only support built-in PWM pins on the Arduino device.
-
-Note that the "invert" capability, to support LEDs connected in active-low mode, is only supported when direct PWM connections are used.  The external PWM driver devices do not support active-low.
+Note that the "invert" capability, to support LEDs connected in active-low mode, is only supported when direct PWM connections are used.  The external PWM driver devices do not support active-low, writing a zero to the channel will always turn the attached LED off.
 
 ## Examples ##
 
@@ -41,7 +31,7 @@ Examples of linear and exponential fade curves can be seen [here](extras/FadeLED
 
 ## Dependencies ##
 
-*FadeLED* requires the *StateMachine* class.  *FadeLED_Lin*, *FadeLED_Exp*, and *FadeLED_Func* only require *FadeLED* and no additional classes.
+*FadeLED* requires the *StateMachine* class.  *FadeLED_Lin*, *FadeLED_Exp*, and *FadeLED_Func* only require *FadeLED* and the libraries for the two Adafruit PWM driver boards.
 
 ## Installation ##
 
