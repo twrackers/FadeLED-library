@@ -57,7 +57,7 @@ class FadeLED : public StateMachine
          * @param device Attached Adafruit_TLC59711 device
          * @param channel Channel, in range 0 to 11
          */
-        FadeLED(Adafruit_TLC59711& device, uint16_t channel);
+        FadeLED(Adafruit_TLC59711* device, uint16_t channel);
 #endif
 
 #if defined(ALLOW_24CH)
@@ -67,7 +67,7 @@ class FadeLED : public StateMachine
          * @param device Attached Adafruit_TLC5947 device
          * @param channel Channel, in range 0 to 23
          */
-        FadeLED(Adafruit_TLC5947& device, uint16_t channel);
+        FadeLED(Adafruit_TLC5947* device, uint16_t channel);
 #endif
 
         /**

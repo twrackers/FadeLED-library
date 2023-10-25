@@ -32,11 +32,11 @@ FadeLED::FadeLED(const byte pin, const bool invert) :
 // This constructor will be called by the constructors of subclasses of FadeLED.
 // This constructor assigns the FadeLED object to one channel of an
 // Adafruit TLC59711 12-channel PWM driver.
-FadeLED::FadeLED(Adafruit_TLC59711& device, const uint16_t channel) : 
+FadeLED::FadeLED(Adafruit_TLC59711* device, const uint16_t channel) : 
     StateMachine(10, true),
     m_state(eOff),
     m_switchTime(0L),
-    m_dev12(&device),
+    m_dev12(device),
 #if defined(ALLOW_24CH)
     m_dev24(NULL),
 #endif
@@ -56,14 +56,14 @@ FadeLED::FadeLED(Adafruit_TLC59711& device, const uint16_t channel) :
 // This constructor will be called by the constructors of subclasses of FadeLED.
 // This constructor assigns the FadeLED object to one channel of an
 // Adafruit TLC5947 24-channel PWM driver.
-FadeLED::FadeLED(Adafruit_TLC5947& device, uint16_t channel) : 
+FadeLED::FadeLED(Adafruit_TLC5947* device, uint16_t channel) : 
     StateMachine(10, true),
     m_state(eOff),
     m_switchTime(0L),
 #if defined(ALLOW_12CH)
     m_dev12(NULL),
 #endif
-    m_dev24(&device),
+    m_dev24(device),
     m_pin(channel),
     m_scale(0x0FFF),
     m_invert(false)

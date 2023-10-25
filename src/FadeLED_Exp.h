@@ -58,8 +58,8 @@ class FadeLED_Exp : public FadeLED
          * @param channel Channel, in range 0 to 11
          */
         FadeLED_Exp(
-            Adafruit_TLC59711& device, 
-            uint16_t channel,
+            Adafruit_TLC59711* device, 
+            const uint16_t channel,
             const unsigned long onTime, 
             const unsigned long offTime
         );
@@ -73,8 +73,8 @@ class FadeLED_Exp : public FadeLED
          * @param channel Channel, in range 0 to 23
          */
         FadeLED_Exp(
-            Adafruit_TLC5947& device,
-            uint16_t channel,
+            Adafruit_TLC5947* device,
+            const uint16_t channel,
             const unsigned long onTime, 
             const unsigned long offTime
         );

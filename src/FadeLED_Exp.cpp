@@ -43,7 +43,7 @@ FadeLED_Exp::FadeLED_Exp(
 // The PWM output is one of the channels of an Adafruit TLC59711 12-channel
 // PWM driver.
 FadeLED_Exp::FadeLED_Exp(
-    Adafruit_TLC59711& device,
+    Adafruit_TLC59711* device,
     const uint16_t channel,
     const unsigned long onTime, 
     const unsigned long offTime
@@ -60,7 +60,7 @@ FadeLED_Exp::FadeLED_Exp(
 // The PWM output is one of the channels of an Adafruit TLC5947 24-channel
 // PWM driver.
 FadeLED_Exp::FadeLED_Exp(
-    Adafruit_TLC5947& device,
+    Adafruit_TLC5947* device,
     const uint16_t channel,
     const unsigned long onTime, 
     const unsigned long offTime

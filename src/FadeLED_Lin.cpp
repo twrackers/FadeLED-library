@@ -25,10 +25,10 @@ FadeLED_Lin::FadeLED_Lin(
 // the driver device supports daisy-chaining, the channel is not limited
 // to the range of 0 through 11.
 FadeLED_Lin::FadeLED_Lin(
-    const Adafruit_TLC59711& device, 
-    uint16_t channel,
-    unsigned long onTime, 
-    unsigned long offTime
+    Adafruit_TLC59711* device, 
+    const uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
 ) : FadeLED(device, channel), 
     m_onTime(onTime), 
     m_offTime(offTime)
@@ -44,10 +44,10 @@ FadeLED_Lin::FadeLED_Lin(
 // the driver device supports daisy-chaining, the channel is not limited
 // to the range of 0 through 23.
 FadeLED_Lin::FadeLED_Lin(
-    const Adafruit_TLC5947& device, 
-    uint16_t channel,
-    unsigned long onTime, 
-    unsigned long offTime
+    Adafruit_TLC5947* device, 
+    const uint16_t channel,
+    const unsigned long onTime, 
+    const unsigned long offTime
 ) : FadeLED(device, channel), 
     m_onTime(onTime), 
     m_offTime(offTime)

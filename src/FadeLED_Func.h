@@ -55,9 +55,11 @@ class FadeLED_Func : public FadeLED
          * 
          * @param device Attached Adafruit_TLC59711 device
          * @param channel Channel, in range 0 to 11
+         * @param onTime turn-on time (milliseconds)
+         * @param offTime turn-off time (milliseconds)
          */
         FadeLED_Func(
-            const Adafruit_TLC59711& device, 
+            Adafruit_TLC59711* device, 
             const uint16_t channel,
             const unsigned long onTime, 
             const unsigned long offTime
@@ -70,9 +72,11 @@ class FadeLED_Func : public FadeLED
          * 
          * @param device Attached Adafruit_TLC5947 device
          * @param channel Channel, in range 0 to 23
+         * @param onTime turn-on time (milliseconds)
+         * @param offTime turn-off time (milliseconds)
          */
         FadeLED_Func(
-            const Adafruit_TLC5947& device,
+            Adafruit_TLC5947* device,
             const uint16_t channel,
             const unsigned long onTime, 
             const unsigned long offTime
