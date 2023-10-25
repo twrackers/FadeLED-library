@@ -1,5 +1,7 @@
 #include <FadeLED.h>
 
+#include <Streaming.h>
+
 // Constructor
 //
 // An instance of this class runs on a 10 msec (100 Hz) update interval.
@@ -11,12 +13,12 @@ FadeLED::FadeLED(const byte pin, const bool invert) :
     StateMachine(10, true),
     m_state(eOff),
     m_switchTime(0L),
-#if defined(ALLOW_12CH)
+// #if defined(ALLOW_12CH)
     m_dev12(NULL),
-#endif
-#if defined(ALLOW_24CH)
+// #endif
+// #if defined(ALLOW_24CH)
     m_dev24(NULL),
-#endif
+// #endif
     m_pin((uint16_t) pin),
     m_scale(0x00FF),
     m_invert(invert)
@@ -25,7 +27,7 @@ FadeLED::FadeLED(const byte pin, const bool invert) :
     analogWrite(m_pin, m_invert ? m_scale : 0);
 }
 
-#if defined(ALLOW_12CH)
+// #if defined(ALLOW_12CH)
 // Constructor
 //
 // An instance of this class runs on a 10 msec (100 Hz) update interval.
@@ -37,9 +39,9 @@ FadeLED::FadeLED(Adafruit_TLC59711* device, const uint16_t channel) :
     m_state(eOff),
     m_switchTime(0L),
     m_dev12(device),
-#if defined(ALLOW_24CH)
+// #if defined(ALLOW_24CH)
     m_dev24(NULL),
-#endif
+// #endif
     m_pin(channel),
     m_scale(0xFFFF),
     m_invert(false)
@@ -47,9 +49,9 @@ FadeLED::FadeLED(Adafruit_TLC59711* device, const uint16_t channel) :
     m_dev12->setPWM(m_pin, 0);
     m_dev12->write();
 }
-#endif
+// #endif
 
-#if defined(ALLOW_24CH)
+// #if defined(ALLOW_24CH)
 // Constructor
 //
 // An instance of this class runs on a 10 msec (100 Hz) update interval.
@@ -60,9 +62,9 @@ FadeLED::FadeLED(Adafruit_TLC5947* device, uint16_t channel) :
     StateMachine(10, true),
     m_state(eOff),
     m_switchTime(0L),
-#if defined(ALLOW_12CH)
+// #if defined(ALLOW_12CH)
     m_dev12(NULL),
-#endif
+// #endif
     m_dev24(device),
     m_pin(channel),
     m_scale(0x0FFF),
@@ -71,7 +73,7 @@ FadeLED::FadeLED(Adafruit_TLC5947* device, uint16_t channel) :
     m_dev24->setPWM(m_pin, 0);
     m_dev24->write();
 }
-#endif
+// #endif
 
 // Write value to PWM channel or pin.
 //
@@ -81,20 +83,21 @@ FadeLED::FadeLED(Adafruit_TLC5947* device, uint16_t channel) :
 //     Writes to TLC devices require a write() call to the
 //     device to have all prior setPWM() calls take effect.
 void FadeLED::setPWM(const uint16_t pwm) {
-#if defined(ALLOW_12CH)
+// #if defined(ALLOW_12CH)
     if (m_dev12) {
         // 16-bit PWM channels
         m_dev12->setPWM(m_pin, pwm & m_scale);
+        Serial << m_pin << "," << (pwm & m_scale) << " ";
         return;
     }
-#endif
-#if defined(ALLOW_24CH)
+// #endif
+// #if defined(ALLOW_24CH)
     if (m_dev24) {
         // 12-bit PWM channels
         m_dev24->setPWM(m_pin, pwm & m_scale);
         return;
     }
-#endif
+// #endif
     analogWrite(m_pin, pwm & m_scale);
 }
 

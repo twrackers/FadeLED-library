@@ -11,13 +11,10 @@ void FadeLED_Exp::init(
 ) {
     double scale = (double) m_scale;
     double delta = (double) m_updateDelta;
-    double dt;
     // Calculate turning-on decay constant.
-    dt = (double) onTime / delta;
-    m_onTau = pow(scale, -1.0 / dt);
+    m_onTau = 1.0 / pow(scale, delta / (double) onTime);
     // Calculate turning-off decay constant.
-    dt = (double) offTime / delta;
-    m_offTau = pow(scale, -1.0 / dt);
+    m_offTau = 1.0 / pow(scale, delta / (double) offTime);
 }
 
 // Constructor
@@ -36,7 +33,7 @@ FadeLED_Exp::FadeLED_Exp(
     init(onTime, offTime);
 }
 
-#if defined(ALLOW_12CH)
+// #if defined(ALLOW_12CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing exponential fade curves.
@@ -51,9 +48,9 @@ FadeLED_Exp::FadeLED_Exp(
 {
     init(onTime, offTime);
 }
-#endif
+// #endif
 
-#if defined(ALLOW_24CH)
+// #if defined(ALLOW_24CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing exponential fade curves.
@@ -68,7 +65,7 @@ FadeLED_Exp::FadeLED_Exp(
 {
     init(onTime, offTime);
 }
-#endif
+// #endif
 
 // Performs the update cycle.
 bool FadeLED_Exp::update()

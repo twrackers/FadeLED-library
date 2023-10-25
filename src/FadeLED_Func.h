@@ -49,7 +49,7 @@ class FadeLED_Func : public FadeLED
             const bool invert = false
         );
         
-#if defined(ALLOW_12CH)
+// #if defined(ALLOW_12CH)
         /**
          * Constructor to drive Adafruit 12-Channel 16-bit PWM LED Driver
          * 
@@ -64,9 +64,9 @@ class FadeLED_Func : public FadeLED
             const unsigned long onTime, 
             const unsigned long offTime
         );
-#endif
+// #endif
 
-#if defined(ALLOW_24CH)
+// #if defined(ALLOW_24CH)
         /**
          * Constructor to drive Adafruit 24-Channel 12-bit PWM LED Driver
          * 
@@ -81,7 +81,7 @@ class FadeLED_Func : public FadeLED
             const unsigned long onTime, 
             const unsigned long offTime
         );
-#endif
+// #endif
 
         /**
          * Update this object's state.
