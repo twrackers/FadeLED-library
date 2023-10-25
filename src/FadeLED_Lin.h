@@ -49,9 +49,9 @@ class FadeLED_Lin : public FadeLED
          */
         FadeLED_Lin(
             const Adafruit_TLC59711& device, 
-            const uint16_t channel,
-            const unsigned long onTime, 
-            const unsigned long offTime
+            uint16_t channel,
+            unsigned long onTime, 
+            unsigned long offTime
         );
 #endif
 
@@ -64,9 +64,9 @@ class FadeLED_Lin : public FadeLED
          */
         FadeLED_Lin(
             const Adafruit_TLC5947& device,
-            const uint16_t channel,
-            const unsigned long onTime, 
-            const unsigned long offTime
+            uint16_t channel,
+            unsigned long onTime, 
+            unsigned long offTime
         );
 #endif
 
