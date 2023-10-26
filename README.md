@@ -9,13 +9,16 @@ The `FadeLED` library provides the ability to turn LEDs on and off with fade-in/
 - The *FadeLED_Exp* class is also subclassed from *FadeLED*, and produces an *exponential fade* effect.  This mimics a large incandescent bulb which is not faded in a controlled manner, but takes a finite time to go from off to on as the filament heats up.  Similarly, this type of bulb also takes some time to go fully dark when power is removed.  Because these are thermal effects, they naturally follow exponential curves both turning on and off.
 - The *FadeLED_Func* class is also subclassed from *FadeLED*.  It defines no specific fade effect, but allows the calling code to create an arbitrary one.  This is done by calling the *get()* method after updating the object, which will return a value of type *double* between 0.0 and 1.0, where 0.0 is fully off and 1.0 is fully on.  A new value in this range can then be computed and passed back to the object with the *set()* method, to be converted to the appropriate integer value and written to the PWM analog output.  See the *Lighthouse* example code to see how this can be done.
 
+## Active-low support #
+LEDs connected to Arduino PWM pins are usually connected with the anode (+) to the PWM pin and the cathode (-) to ground.  The `FadeLED` constructor for using internal PWM pins has an `invert` parameter which defaults to `false`.  Setting it to `true` allow an LED to be connected with anode to Vcc and cathode to PWM, in a pull-down manner.
+
 ## Multi-device support ##
 Originally, this library only supported the Arduino `analogWrite` function to control built-in PWM outputs on Arduino devices.  The library has now been expanded to support external PWM drivers as well.  At this time those devices are:
 
 - [Adafruit 12-Channel 16-bit PWM LED Driver - SPI Interface](https://www.adafruit.com/product/1455)
 - [Adafruit 24-Channel 12-bit PWM LED Driver - SPI Interface](https://www.adafruit.com/product/1429)
 
-Note that the "invert" capability, to support LEDs connected in active-low mode, is only supported when direct PWM connections are used.  The external PWM driver devices do not support active-low, writing a zero to the channel will always turn the attached LED off.
+On these devices, the constructors have no `invert` parameter as the LEDs *always* connect in pull-down manner, so the inversion happens in the driver devices.
 
 ## Examples ##
 
