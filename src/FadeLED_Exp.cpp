@@ -33,7 +33,7 @@ FadeLED_Exp::FadeLED_Exp(
     init(onTime, offTime);
 }
 
-// #if defined(ALLOW_12CH)
+#if defined(ALLOW_12CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing exponential fade curves.
@@ -48,9 +48,9 @@ FadeLED_Exp::FadeLED_Exp(
 {
     init(onTime, offTime);
 }
-// #endif
+#endif
 
-// #if defined(ALLOW_24CH)
+#if defined(ALLOW_24CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing exponential fade curves.
@@ -65,7 +65,7 @@ FadeLED_Exp::FadeLED_Exp(
 {
     init(onTime, offTime);
 }
-// #endif
+#endif
 
 // Performs the update cycle.
 bool FadeLED_Exp::update()

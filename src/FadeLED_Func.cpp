@@ -17,7 +17,7 @@ FadeLED_Func::FadeLED_Func(
 {
 }
 
-// #if defined(ALLOW_12CH)
+#if defined(ALLOW_12CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing fade curves.
@@ -34,9 +34,9 @@ FadeLED_Func::FadeLED_Func(
     m_offTime(offTime)
 {
 }
-// #endif
+#endif
 
-// #if defined(ALLOW_24CH)
+#if defined(ALLOW_24CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing fade curves.
@@ -53,7 +53,7 @@ FadeLED_Func::FadeLED_Func(
     m_offTime(offTime)
 {
 }
-// #endif
+#endif
 
 // Performs the update cycle.
 bool FadeLED_Func::update()

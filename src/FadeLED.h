@@ -1,14 +1,14 @@
 #ifndef _FADE_LED__H_
 #define _FADE_LED__H_
 
-// #if defined(ALLOW_12CH)
-// #pragma message("ALLOW_12CH")
+#if defined(ALLOW_12CH)
+#pragma message("ALLOW_12CH")
 #include <Adafruit_TLC59711.h>
-// #endif
-// #if defined(ALLOW_24CH)
-// #pragma message("ALLOW_24CH")
+#endif
+#if defined(ALLOW_24CH)
+#pragma message("ALLOW_24CH")
 #include <Adafruit_TLC5947.h>
-// #endif
+#endif
 
 #include <StateMachine.h>
 
@@ -29,12 +29,12 @@ class FadeLED : public StateMachine
         } m_state;                  // state machine current state
         
         unsigned long m_switchTime; // time when on/off state changed
-// #if defined(ALLOW_12CH)
+#if defined(ALLOW_12CH)
         Adafruit_TLC59711* m_dev12; // pointer to 12-channel device
-// #endif
-// #if defined(ALLOW_24CH)
+#endif
+#if defined(ALLOW_24CH)
         Adafruit_TLC5947* m_dev24;  // pointer to 24-channel device
-// #endif
+#endif
         const uint16_t m_pin;       // pin or channel to drive
         const uint16_t m_scale;     // full-scale value
         const bool m_invert;        // true if output is active-low
@@ -50,7 +50,7 @@ class FadeLED : public StateMachine
          */
         FadeLED(const byte pin, const bool invert = false);
 
-// #if defined(ALLOW_12CH)
+#if defined(ALLOW_12CH)
         /**
          * Constructor to drive Adafruit 12-Channel 16-bit PWM LED Driver
          * 
@@ -58,9 +58,9 @@ class FadeLED : public StateMachine
          * @param channel Channel, in range 0 to 11
          */
         FadeLED(Adafruit_TLC59711* device, uint16_t channel);
-// #endif
+#endif
 
-// #if defined(ALLOW_24CH)
+#if defined(ALLOW_24CH)
         /**
          * Constructor to drive Adafruit 24-Channel 12-bit PWM LED Driver
          * 
@@ -68,7 +68,7 @@ class FadeLED : public StateMachine
          * @param channel Channel, in range 0 to 23
          */
         FadeLED(Adafruit_TLC5947* device, uint16_t channel);
-// #endif
+#endif
 
         /**
          * Set PWM channel/pin output

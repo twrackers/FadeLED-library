@@ -17,7 +17,7 @@ FadeLED_Lin::FadeLED_Lin(
 {
 }
 
-// #if defined(ALLOW_12CH)
+#if defined(ALLOW_12CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing linear fade curves.
@@ -34,9 +34,9 @@ FadeLED_Lin::FadeLED_Lin(
     m_offTime(offTime)
 {
 }
-// #endif
+#endif
 
-// #if defined(ALLOW_24CH)
+#if defined(ALLOW_24CH)
 // Constructor
 //
 // This is a subclass of FadeLED, implementing linear fade curves.
@@ -53,7 +53,7 @@ FadeLED_Lin::FadeLED_Lin(
     m_offTime(offTime)
 {
 }
-// #endif
+#endif
 
 // Performs the update cycle.
 bool FadeLED_Lin::update()
